@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/jquery.min.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
@@ -40,21 +42,23 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-                    <ul class="nav-bar ml-auto">
-                        <li class="nav-item"><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
 
-                    </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @if (!app('request')->is('admin') and !app('request')->is('admin/*') )
+                        <li class="nav-item"><a class="nav-link"><i class="fas fa-shopping-cart"></i></a></li>
+                        <li class="nav-item"><a class="nav-link"><i class="fas fa-heart"></i></a></li>
                         <!-- Authentication Links -->
+                        @endif
+
                         @guest
-                            @if (Route::has('login') and ( !app('request')->is('dashbord') and !app('request')->is('dashbord/*') ))
+                            @if (Route::has('login') and ( !app('request')->is('admin') and !app('request')->is('admin/*') ))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
-                            @if (Route::has('register') and  ( !app('request')->is('dashbord') and !app('request')->is('dashbord/*') ))
+                            @if (Route::has('register') and  ( !app('request')->is('admin') and !app('request')->is('admin/*') ))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
@@ -64,6 +68,8 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
+                          @if (auth::guard('web')->check())
+
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -76,6 +82,21 @@
                                         @csrf
                                     </form>
                                 </div>
+                                @else
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                                @endif
+
+
                             </li>
                         @endguest
                     </ul>
