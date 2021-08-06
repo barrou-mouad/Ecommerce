@@ -6,16 +6,26 @@ function getProds(link, idCat) {
     });
 }
 $('.cat').on('click', function() {
-    $('.cat').removeClass('selected');
-    $(this).addClass('selected');
-})
-$(document).on('load', function() {
-    alert('helllo')
-
+    $('.cat').removeClass('active');
+    $(this).addClass('active');
 })
 
-function getcategorie() {
-    $.get('http://127.0.0.1:8000/getcategories', function(resultat) {
-        $('#cat').html(resultat);
+function selected() {
+    if ($('#catID').val() != 0) {
+        $('.cat').removeClass('active');
+        $('#' + $('#catID').val()).addClass('active');
+        console.log('hhh')
+    }
+
+}
+
+
+function addtocart(link) {
+    $.get('http://127.0.0.1:8000/addcart/' + link + '/' + $('#qty').val(), function(resultat) {
+        console.log(resultat);
+        $('#msg').show();
+        setTimeout(function() {
+            $('#msg').hide();
+        }, 4000);
     });
 }

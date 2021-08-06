@@ -8,7 +8,7 @@ use App\Models\Like;
 class Produit extends Model
 {
     use HasFactory;
-    public function like(){
+    public function likes(){
         return $this->HasMany(Like::class);
     }
 }

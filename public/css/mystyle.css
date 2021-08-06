@@ -2,3 +2,36 @@
     width: 90%;
     margin: 0 auto;
 }
+
+.cat {
+    text-align: center;
+    padding: 10px;
+    font-family: 'Karla', sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+    /*  transition: background-color 1s; */
+}
+
+.cat:hover {
+    background-color: aqua;
+    border-radius: 30px;
+    padding: 10px;
+    cursor: pointer;
+    font-family: 'Karla', sans-serif;
+}
+
+.selected {
+    background-color: orangered;
+    border-radius: 30px;
+    padding: 10px;
+    cursor: pointer;
+    font-family: 'Karla', sans-serif;
+}
+
+.selected:hover {
+    background-color: orangered !important;
+    border-radius: 30px !important;
+    padding: 10px;
+    cursor: pointer;
+    font-family: 'Karla', sans-serif;
+}

@@ -40,14 +40,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                    <li  class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         @if (!app('request')->is('admin') and !app('request')->is('admin/*') )
-                        <li class="nav-item"><a class="nav-link"><i class="fas fa-shopping-cart"></i></a></li>
-                        <li class="nav-item"><a class="nav-link"><i class="fas fa-heart"></i></a></li>
+                        <li class="nav-item"><a href="{{route('mycart')}}" class="nav-link"><i class="fas fa-shopping-cart"></i></a></li>
+                        <li class="nav-item"><a href="{{route('favorite')}}" class="nav-link"><i class="fas fa-heart"></i></a></li>
                         <!-- Authentication Links -->
                         @endif
 
@@ -105,7 +105,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-2">
             @yield('content')
         </main>
     </div>
