@@ -1,5 +1,5 @@
 .mycontainer {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
 }
 
@@ -10,14 +10,6 @@
     font-size: 20px;
     font-weight: 200;
     /*  transition: background-color 1s; */
-}
-
-.cat:hover {
-    background-color: aqua;
-    border-radius: 30px;
-    padding: 10px;
-    cursor: pointer;
-    font-family: 'Karla', sans-serif;
 }
 
 .selected {
@@ -34,4 +26,41 @@
     padding: 10px;
     cursor: pointer;
     font-family: 'Karla', sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+    #search {
+        border: 1px solid red;
+        margin-left: 25px;
+    }
+    #result {
+        margin-left: 10px!important;
+        top: 128px !important;
+        left: -px;
+    }
+}
+
+.owl-prev {
+    position: absolute;
+    left: -30px;
+    font-size: xx-large;
+    top: 60px;
+}
+
+.owl-next {
+    position: absolute;
+    right: -30px;
+    font-size: xx-large;
+    font-weight: bolder;
+    top: 60px;
+}
+
+.owl-next span,
+.owl-prev span {
+    font-size: 90px;
+}
+
+a:hover {
+    text-decoration: none !important;
+    color: white;
 }

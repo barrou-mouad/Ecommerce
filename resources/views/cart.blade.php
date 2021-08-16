@@ -1,4 +1,6 @@
-@include('layouts.app')
+@extends('layouts.app')
+
+@section('content')
 <div class="table-responsive">
     <div class="container">
         <table class="table text-center table-bordered table-hover">
@@ -34,3 +36,6 @@
         </table>
         <a href="{{route('payer')}}" class="btn btn-info">Payer {{\Cart::getSubTotal();}} DH via PayPal <i class="fab fa-paypal"></i></a>
 </div>
+
+@endsection
+

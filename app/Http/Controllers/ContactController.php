@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-  public function create(){
+  public function create(Request $req){
       $details=[
-          'title'=>'test from Ecommerce',
-          'body' => 'welcome in our site web'
+          'subject'=>$req->subject,
+          'body' => $req->body
       ];
-      Mail::to('m.barrou99@gmail.com')->send(new ContactMail($details));
-
+      Mail::to($req->email)->send(new ContactMail($details));
+     return back()->with(['success' => 'Le message est envoyé']);
   }
 }

@@ -6,7 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use App\Models\Commande;
+use App\Models\Like;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -42,4 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function commandes(){
+        return $this->HasMany(Commande::class);
+    }
+    public function likes(){
+        return $this->HasMany(Like::class);
+    }
 }

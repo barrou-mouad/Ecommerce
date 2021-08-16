@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Commande;
+use App\Models\Produit;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -25,11 +28,26 @@ public function successPayement(Request $req){
     $response=$paypalModule->getExpressCheckoutDetails($req->token);
     $response = $paypalModule->doExpressCheckoutPayment($this->getdata(), $req->token, $req->PayerID);
     if(in_array($response['ACK'],['Success'])){
+        foreach(\Cart::getContent() as $item){
+      Commande::create(
+          [
+              'user_id'=> Auth::id(),
+              'produit_id' =>$item->id  ,
+              'qty'=>  $item->quantity,
+              'total'=>  $item->quantity * $item->price
+          ]
+
+          );
+          $produit= Produit::find($item->id);
+          $produit->in_stock=(int) $produit->in_stock - (int) $item->quantity;
+          $produit->save();
+            }
+
     \Cart::Clear();
     return redirect()->route('index');
     }
     else{
-        return "tnakt";
+        return redirect()->route('index')->with(['error'=>'le payement n\' est pas bien réusssi ']);
     }
 
 }
