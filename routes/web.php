@@ -39,7 +39,7 @@ Route::get('/', function () {
     }
     return view('welcome')->with([
         'categories'=> Categorie::has('produits')->get(),
-        'produits' => Produit::latest()->paginate(3),
+        'produits' => Produit::latest()->paginate(4),
         'favorites'=> $res,
         'reduction' => Produit::where('old_price','>',0)->latest()->paginate(5)
     ]);
