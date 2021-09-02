@@ -16,7 +16,7 @@ class ProduitController extends Controller
     }
 
     public function getbycat($id){
-        $produits=Produit::where('categorie_id','=',$id)->paginate(3);
+        $produits=Produit::where('categorie_id','=',$id)->paginate(4);
         $favorites = DB::table('likes')
         ->select(DB::raw('count(*) as favorite_count, produit_id'))
         ->groupByRaw('produit_id')
@@ -28,7 +28,7 @@ class ProduitController extends Controller
         }
         return view('welcome')->with([
             'produits'=>$produits,
-            'categories'=>Categorie::has('produits')->get(),
+            'categories'=>Categorie::all(),
             'favorites'=> $res,
             'reduction' => Produit::where('old_price','>',0)->latest()->paginate(5)
         ]);
@@ -47,6 +47,21 @@ public function getlast(){
                  array_push($res,Produit::where('id','=',$user->produit_id)->get());
                 }
                 return $res;
+}
+public function fetch_data(Request $request,$cat)
+{
+ if($request->ajax())
+ {
+     if($cat==0){
+
+      $produits=  Produit::latest()->paginate(4);
+     }
+     else{
+        $produits = Produit::where('categorie_id','=',$cat)->paginate(4);
+     }
+
+    return view('produits', compact('produits'))->render();
+ }
 }
 public function add(Request $req){
     $produit=new Produit();

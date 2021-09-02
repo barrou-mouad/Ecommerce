@@ -2,10 +2,16 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+
+    <div class="row justify-content-center bg-bluesky-bottom">
+        <div class="col-md-6">
+            <div class="col-md-6 justify-content-end align-items-end">
+                <img src="{{ asset('images/logo.png') }}" class="ml-5" height="300px">
+                  </div>
+        </div>
+        <div class="col-md-6 border-left">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -77,11 +83,12 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('S\'inscrire') }}
                                 </button>
                             </div>
                         </div>
                     </form>
+                 <div class="mt-2"> Avez vous un compte ? <a class=" btn-link " href="#">Se connecter</a></div>
                 </div>
             </div>
         </div>

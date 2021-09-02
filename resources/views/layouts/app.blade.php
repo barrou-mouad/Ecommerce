@@ -33,12 +33,12 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <link href="{{ asset('css/mystyle.css') }}" rel="stylesheet">
 </head>
-<body onload="selected()">
+<body onload="selected()" class="">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light  bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                   <img width="70px" src="{{ asset('images/logo.png') }}">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -97,7 +97,6 @@
                             <li class="nav-item"><a href="{{route('home')}}" class="nav-link">{{ Auth::user()->name }}</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-
                                 </a>
                           @if (auth::guard('web')->check())
 
@@ -138,10 +137,38 @@
             </div>
         </nav>
 
-        <main class="py-2">
+        <main>
             @yield('content')
         </main>
 
+        <footer class="footer bg-bluesky-bottom">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 footer-navigation">
+                    <h3 class="text-center">
+                        <a href="#" class="text-center"><img class="mx-auto" src="{{ asset('images/logo.png') }}" width="80px" alt="" srcset=""></a>
+                    </h3>
+                    <p class="links text-center"><a href="#">Home</a><strong> · </strong><a href="#">Login</a><strong> · </strong><a href="#">Sign up</a><strong> · </strong><a href="#">Contact</a></p>
+                    <p class="company-name text-center">Copy Right © 2021</p>
+                </div>
+                <div class="col-sm-6 col-md-4 footer-contacts">
+                    <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
+                        <p><span class="new-line-span">Ancienne Route de l’Aéroport. Tanger </span> Maroc</p>
+                    </div>
+                    <div><i class="fa fa-phone footer-contacts-icon"></i>
+                        <p class="footer-center-info email text-left"> +1 9485045958</p>
+                    </div>
+                    <div><i class="fa fa-envelope footer-contacts-icon"></i>
+                        <p> <a href="#" target="_blank">support@bbbootstrap.com</a></p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4 footer-about">
+                    <h4>Supported payment systems</h4>
+                    <p><img src="{{ asset('images/paypal.png') }}" height="40px" alt="" srcset=""></p>
+
+                </div>
+            </div>
+        </footer>
     </div>
 
 </body>

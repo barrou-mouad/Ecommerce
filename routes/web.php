@@ -38,7 +38,7 @@ Route::get('/', function () {
      array_push($res,Produit::where('id','=',$favorite->produit_id)->get()->first());
     }
     return view('welcome')->with([
-        'categories'=> Categorie::has('produits')->get(),
+        'categories'=> Categorie::all(),
         'produits' => Produit::latest()->paginate(4),
         'favorites'=> $res,
         'reduction' => Produit::where('old_price','>',0)->latest()->paginate(5)
@@ -86,7 +86,7 @@ Route::prefix('admin')->group(function () {
 
 
 Auth::routes();
-
+Route::get('pagination/fetch_data/{cat}',[ProduitController::class,'fetch_data']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/add', [AdminController::class, 'create']);
 Route::get('/getcategories', [CategorieController::class, 'getall']);

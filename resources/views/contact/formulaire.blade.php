@@ -16,6 +16,6 @@
     <input type="text" name="subject" class="form-control">
     <label>Message</label>
     <textarea name="body" class="form-control" rows="5"></textarea>
-    <input type="submit" class="btn btn-primary my-1" value="Envoyer">
+    <input type="submit" class="btn btn-primary my-1" value="Envoyer" style="background: #B6C867 !important;">
 </form>
 </div>

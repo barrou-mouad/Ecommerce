@@ -13,8 +13,8 @@ $('.cat').on('click', function() {
 function selected() {
     console.log('hjjkh')
     if ($('#catID').val() != 0) {
-        $('.cat').removeClass('active');
-        $('#' + $('#catID').val()).addClass('active');
+        $('.cate').removeClass('selected');
+        $('#' + $('#catID').val()).addClass('selected');
 
 
     }
@@ -93,3 +93,19 @@ $('.owl-carousel2').owlCarousel({
         }
     }
 })
+$(document).on('click', '.pagination a', function(event) {
+    event.preventDefault();
+
+    var page = $(this).attr('href').split('page=')[1];
+    fetch_data(page);
+});
+
+function fetch_data(page) {
+    console.log($('#catID').val())
+    $.ajax({
+        url: "/pagination/fetch_data/" + $('#catID').val() + "?page=" + page,
+        success: function(data) {
+            $('#produit').html(data);
+        }
+    });
+}
