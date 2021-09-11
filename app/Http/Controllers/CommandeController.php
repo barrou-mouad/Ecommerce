@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Commande;
 use App\Models\Produit;
@@ -20,6 +18,30 @@ class CommandeController extends Controller
          'commande'=>Commande::whereNotNull('delivery_date')->get()]
     );
 }
+public function getSumbyears($year){
+   $res=Commande::selectRaw('year(created_at) year,sum(total) as somme, month(created_at) month')
+   ->groupBy('year','month')
+   ->where('created_at','like',''.$year.'%')
+   ->get();
+$tab=[0,0,0,0,0,0,0,0,0,0,0,0];
+for($i=0;$i<count($res);$i++){
+$tab[$res[$i]->month-1]=$res[$i]->somme;
+}
+return $tab;
+
+}
+public function getCmdbyears($year){
+    $res=Commande::selectRaw('year(created_at) year,count(total) as count, month(created_at) month')
+    ->groupBy('year','month')
+    ->where('created_at','like',''.$year.'%')
+    ->get();
+ $tab=[0,0,0,0,0,0,0,0,0,0,0,0];
+ for($i=0;$i<count($res);$i++){
+ $tab[$res[$i]->month-1]=$res[$i]->count;
+ }
+ return $tab;
+
+ }
 public function insertdate(Request $req){
 
     $cmd=Commande::find($req->id);
@@ -42,11 +64,30 @@ public function update(Request $req){
 }
 // Revenu par mois
 public function getsumbyMonth(){
-  return Commande::selectRaw('year(created_at) year,sum(total) as somme, month(created_at) month')
+ $res=Commande::selectRaw('year(created_at) year,sum(total) as somme, month(created_at) month')
                 ->groupBy('year','month')
                 ->get();
-
+$tab=[0,0,0,0,0,0,0,0,0,0,0,0];
+for($i=0;$i<count($res);$i++){
+$tab[$res[$i]->month-1]=$res[$i]->somme;
 }
+return $tab;
+}
+public function getyears(){
+ return Commande::selectRaw('year(created_at) year')
+    ->distinct()
+    ->get();
+}
+public function getcmdbyMonth(){
+    $res=Commande::selectRaw('year(created_at) year,count(total) as count, month(created_at) month')
+                   ->groupBy('year','month')
+                   ->get();
+   $tab=[0,0,0,0,0,0,0,0,0,0,0,0];
+   for($i=0;$i<count($res);$i++){
+   $tab[$res[$i]->month-1]=$res[$i]->count;
+   }
+   return $tab;
+   }
 //
 public function getProductMostOrders(){
     $products = DB::table('commandes')
@@ -63,6 +104,6 @@ public function getProductMostOrders(){
     return  $res;
 }
 public function indexStatistic(){
-    return view('admin.statistic')->with(['sum'=>$this->getsumbyMonth(),'prods'=>$this->getProductMostOrders()]);
+    return view('admin.statistic')->with(['sum'=>$this->getsumbyMonth(),'prods'=>$this->getProductMostOrders(),'years'=>$this->getyears(),'cmd'=>$this->getcmdbyMonth()]);
 }
 }

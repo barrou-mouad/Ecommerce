@@ -22,13 +22,20 @@ function selected() {
 }
 
 function addtocart(link) {
-    $.get('http://127.0.0.1:8000/addcart/' + link + '/' + $('#qty').val(), function(resultat) {
-        console.log(resultat);
-        $('#msg').show();
-        setTimeout(function() {
-            $('#msg').hide();
-        }, 4000);
-    });
+    $.ajax({
+        method: "GET", // method
+        url: '/addcart/' + link + '/' + $('#qty').val(),
+        success: function(data) {
+            $('#msg').show();
+            setTimeout(function() {
+                $('#msg').hide();
+            }, 4000);
+
+        },
+        error: function() {
+            console.log('hello')
+        }
+    })
 
 }
 $('#search').on('input', function() {
@@ -37,7 +44,7 @@ $('#search').on('input', function() {
     if (query) {
         $.ajax({
             method: "POST", // method
-            url: "/search", // lien ou se trouve les donnees
+            url: "search", // lien ou se trouve les donnees
             data: { query: query, _token: _token },
             success: function($rep) {
                 $("#result").html($rep); // inner HTML

@@ -228,6 +228,7 @@
 <script src="{{asset('dist/js/demo.js')}} "></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dist/js/pages/dashboard.js')}} "></script>
+<script src="{{asset('js/main.js')}} "></script>
 <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready( function () {

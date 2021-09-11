@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="table-responsive">
+<div class="table-responsive mt-3">
     <div class="container">
         <table class="table text-center table-bordered table-hover">
             <thead>

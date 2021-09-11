@@ -177,9 +177,10 @@ a:hover {
     transition: position 3s;
 }
 
-#result {
+
+/* #result {
     top: 56px !important;
-}
+} */
 
 .favorite .card:hover .show1 {
     display: flex;
@@ -193,8 +194,6 @@ a:hover {
     background-color: black !important;
     transition: background-color 3s;
 }
-
-.navbar-brand {}
 
 .navbar {
     height: 100px;
@@ -235,8 +234,6 @@ a:hover {
 .cat::-webkit-scrollbar {
     width: 0.5em;
 }
-
-.nav-link {}
 
 .navbar {
     background-color: #eaf8f8 !important;
@@ -307,9 +304,10 @@ a:hover {
     background-color: beige;
 }
 
-#search {
+
+/* #search {
     top: 137px;
-}
+} */
 
 
 /*-------------------------------------- Footer ----------------------------------------------------*/

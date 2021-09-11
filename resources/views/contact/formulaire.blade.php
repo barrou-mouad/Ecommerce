@@ -1,5 +1,6 @@
-@include('layouts.app')
-<div class="container">
+@extends('layouts.app')
+@section('content')
+<div class="container mt-3">
     @if ( (Session::has('success')))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{Session::get('success')}}
@@ -19,3 +20,5 @@
     <input type="submit" class="btn btn-primary my-1" value="Envoyer" style="background: #B6C867 !important;">
 </form>
 </div>
+
+@endsection

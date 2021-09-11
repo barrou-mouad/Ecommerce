@@ -78,6 +78,9 @@ Route::prefix('admin')->group(function () {
         Route::get('user-edit/{id}',[UserController::class,function ($id) {  return view('admin.useredit')->with(['user'=>User::find($id)]);} ])->name('admin.useredit');
         Route::get('user-add',[UserController::class,function () {  return view('admin.useradd');} ])->name('admin.useradd');
         Route::post('add-user',[UserController::class,'add'])->name('admin.adduser');
+        Route::get('/statisticB/{year}', [CommandeController::class, 'getSumbyears']);
+        Route::get('/statisticC/{year}', [CommandeController::class, 'getCmdbyears']);
+
     });
 
 });
@@ -119,4 +122,5 @@ Route::middleware('web')->group(function () {
     Route::get('/user/passwordEdit', [UserController::class, 'editpassword'])->name('user.editpassword');
     Route::post('/user/updatepassword', [UserController::class, 'updatepassword'])->name('user.updatepassword');
     Route::post('/user/updateuser', [UserController::class, 'update'])->name('user.upadte');
+
 });

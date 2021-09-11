@@ -14,37 +14,24 @@
     <div class="d-flex justify-content-center align-content-between mr-2">
 
         @foreach ($produits as $produit)
-        <div class="card" style="width: 15rem; height:200px">
-        <img src="{{asset('/images/'. $produit->image )}}" height="225px" class="card-img-top" alt="...">
-        <div class="card-body text-center">
-          <h5 class="card-title">{{ $produit->title }}</h5>
-          <p class="card-text"> Price: {{ $produit->price }} DH</p>
-          <div class="d-flex  justify-content-center">
-              <a href="/getproduit/{{$produit->id}}" class="btn btn-primary mr-2">Détails</a>
-            @auth
-            @php
-              $flag=false;
-          @endphp
-          @foreach ($produit->likes as $like)
-            @if($like->user_id==Auth::id())
-            @php
-              $flag=true  ;
-            @endphp
-            @endif
-          @endforeach
-          @if ($flag)
-          <a href="{{route('dislike',$produit->id)}}" class="btn btn-block btn-danger"><i class="fas fa-heart"></i> {{count($produit->likes)}}</a>
-          @else
-          <a href="{{route('like',$produit->id)}}" class="btn btn-block btn-outline-danger"><i class="fas fa-heart"></i> {{count($produit->likes)}}</a>
-          @endif
-        @endauth
-        @guest
-        <a href="{{route('like',$produit->id)}}" class="btn btn-block btn-outline-danger"><i class="fas fa-heart"></i> {{count($produit->likes)}}</a>
-        @endguest
+        <div class="col-xl-3 col-md-6 col-sm-12 my-sm-2">
+            <div class="card bg-light text-center mx-auto h-100" style="width: 15rem;min-height: 360px">
+                <img src="{{asset('/images/'. $produit->image )}}" class="card-img-top bg-bluesky" width="50px" height="200px" alt="...">
+                <div class="card-body bg-bluesky-bottom">
+                    <hr>
+                  <h5 class="card-title"> {{Str::limit($produit->title , 10,) }}</h5>
+                  <p class="card-text"><del>@if ($produit->old_price>0) {{$produit->old_price}} DH @endif</del> <span class="price">{{ $produit->price}} DH</span> </p>
+                  <div class="show1">
+                    <a href="getproduit/{{ $produit->id }}" class="btn btn-light"><i class="fas fa-eye"></i></a>
+                    <button class="btn btn-light my-3"><i class="fas fa-heart"></i></button>
+                    <button  onclick="addtocart({{$produit->id}})"  class="btn btn-light"><i class="fas fa-shopping-cart"></i></button>
+                  </div>
 
-          </div>
-        </div>
-      </div>
+                </div>
+              </div>
+            </div>
+
+
       @endforeach
 </div>
 
